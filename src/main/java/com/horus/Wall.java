@@ -29,12 +29,16 @@ public class Wall implements Structure {
 
     @Override
     public List<Block> findBlocksByMaterial(String material) {
-        if (material == null) {
-            throw new InvalidMaterialException("Material cannot be null!");
-        }
+        validateMaterial(material);
         return blocks.stream()
                 .filter(block -> block.getMaterial().equals(material))
                 .collect(Collectors.toList());
+    }
+
+    private void validateMaterial(String material) {
+        if (material == null) {
+            throw new InvalidMaterialException("Material cannot be null!");
+        }
     }
 
     @Override

@@ -133,6 +133,17 @@ class WallTest {
         assertEquals(exception.getMessage(), "Material cannot be null!");
     }
 
+    @Test
+    void shouldReturnNumberOfBlocks() {
+        //given
+        wall.setBlocks(getBlocksByMaterial(MATERIAL_WOOD, 42));
+
+        //when
+        int result = wall.count();
+
+        assertEquals(42, result);
+    }
+
     private List<Block> getBlocks(List<Block> blocks1, List<Block> blocks2) {
         List<Block> blocks = new ArrayList<>();
         blocks.addAll(blocks1);
