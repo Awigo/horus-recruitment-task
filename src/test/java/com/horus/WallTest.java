@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class WallTest {
 
     private static final String COLOR_RED = "red";
+    private static final String COLOR_BLUE = "blue";
 
     @Test
-    void shouldFindBlockByColor() {
+    void shouldFindBlockByColorRed() {
         //given
         Wall wall = new Wall();
-        wall.setBlocks(getRedBlock());
+        wall.setBlocks(getBlock(COLOR_RED));
 
         //when
         Optional<Block> result = wall.findBlockByColor(COLOR_RED);
@@ -25,11 +26,25 @@ class WallTest {
         assertEquals("red", result.get().getColor());
     }
 
-    private List<Block> getRedBlock() {
+    @Test
+    void shouldFindBlockByColorBlue() {
+        //given
+        Wall wall = new Wall();
+        wall.setBlocks(getBlock(COLOR_BLUE));
+
+        //when
+        Optional<Block> result = wall.findBlockByColor(COLOR_BLUE);
+
+        //then
+        assertTrue(result.isPresent());
+        assertEquals("blue", result.get().getColor());
+    }
+
+    private List<Block> getBlock(String colorRed) {
         return List.of(new Block() {
             @Override
             public String getColor() {
-                return COLOR_RED;
+                return colorRed;
             }
 
             @Override
