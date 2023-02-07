@@ -12,6 +12,7 @@ class WallTest {
 
     private static final String COLOR_RED = "red";
     private static final String COLOR_BLUE = "blue";
+    private static final String MATERIAL_WOOD = "wood";
 
     private Wall wall;
 
@@ -23,7 +24,7 @@ class WallTest {
     @Test
     void shouldFindBlockByColorRed() {
         //given
-        wall.setBlocks(getBlock(COLOR_RED));
+        wall.setBlocks(getBlockByColor(COLOR_RED));
 
         //when
         Optional<Block> result = wall.findBlockByColor(COLOR_RED);
@@ -36,7 +37,7 @@ class WallTest {
     @Test
     void shouldFindBlockByColorBlue() {
         //given
-        wall.setBlocks(getBlock(COLOR_BLUE));
+        wall.setBlocks(getBlockByColor(COLOR_BLUE));
 
         //when
         Optional<Block> result = wall.findBlockByColor(COLOR_BLUE);
@@ -47,12 +48,24 @@ class WallTest {
     }
 
     @Test
+    void whenThereAreNoBlocksInProvidedColorReturnedOptionalShouldBeEmpty() {
+        //given
+        wall.setBlocks(getBlockByColor(COLOR_RED));
+
+        //when
+        Optional<Block> result = wall.findBlockByColor(COLOR_BLUE);
+
+        //then
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
     void whenThereAreNoBlocksReturnedOptionalShouldBeEmpty() {
         //when
         Optional<Block> result = wall.findBlockByColor(COLOR_BLUE);
 
         //then
-        assertFalse(result.isPresent());
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -61,7 +74,20 @@ class WallTest {
         assertEquals(exception.getMessage(), "Color cannot be null!");
     }
 
-    private List<Block> getBlock(String color) {
+    @Test
+    void shouldFindBlockByMaterialWood() {
+        //given
+        wall.setBlocks(getBlockByMaterial(MATERIAL_WOOD));
+
+        //when
+        List<Block> result = wall.findBlocksByMaterial(MATERIAL_WOOD);
+
+        //then
+        assertEquals(1, result.size());
+        assertEquals(MATERIAL_WOOD, result.get(0).getMaterial());
+    }
+
+    private List<Block> getBlockByColor(String color) {
         return List.of(new Block() {
             @Override
             public String getColor() {
@@ -71,6 +97,20 @@ class WallTest {
             @Override
             public String getMaterial() {
                 return null;
+            }
+        });
+    }
+
+    private List<Block> getBlockByMaterial(String material) {
+        return List.of(new Block() {
+            @Override
+            public String getColor() {
+                return null;
+            }
+
+            @Override
+            public String getMaterial() {
+                return material;
             }
         });
     }
