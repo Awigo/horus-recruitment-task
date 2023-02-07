@@ -46,6 +46,15 @@ class WallTest {
         assertEquals(COLOR_BLUE, result.get().getColor());
     }
 
+    @Test
+    void whenThereAreNoBlocksReturnedOptionalShouldBeEmpty() {
+        //when
+        Optional<Block> result = wall.findBlockByColor(COLOR_BLUE);
+
+        //then
+        assertFalse(result.isPresent());
+    }
+
     private List<Block> getBlock(String color) {
         return List.of(new Block() {
             @Override
