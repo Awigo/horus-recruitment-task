@@ -145,6 +145,39 @@ class WallTest {
         assertEquals(42, result);
     }
 
+    @Test
+    void shouldReturnNumberOfBlocksInStructureWhenUsedCompositeBlock() {
+        //given
+        wall.setBlocks(getCompositeBlock(COLOR_RED, MATERIAL_BRICK, 8));
+
+        //when
+        int result = wall.count();
+
+        //then
+        assertEquals(8, result);
+    }
+
+    private List<Block> getCompositeBlock(String color, String material, int blocksInComposite) {
+        ArrayList<Block> blocks = new ArrayList<>();
+        blocks.add(new CompositeBlock() {
+            @Override
+            public List<Block> getBlocks() {
+                return getBlocksByMaterial(MATERIAL_WOOD, blocksInComposite);
+            }
+
+            @Override
+            public String getColor() {
+                return color;
+            }
+
+            @Override
+            public String getMaterial() {
+                return material;
+            }
+        });
+        return blocks;
+    }
+
     private List<Block> getBlocks(List<Block> blocks1, List<Block> blocks2) {
         List<Block> blocks = new ArrayList<>();
         blocks.addAll(blocks1);
