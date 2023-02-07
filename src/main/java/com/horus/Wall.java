@@ -3,6 +3,7 @@ package com.horus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Wall implements Structure {
 
@@ -28,31 +29,9 @@ public class Wall implements Structure {
 
     @Override
     public List<Block> findBlocksByMaterial(String material) {
-        if (material.equals("wood")) {
-            return List.of(new Block() {
-                @Override
-                public String getColor() {
-                    return null;
-                }
-
-                @Override
-                public String getMaterial() {
-                    return "wood";
-                }
-            });
-        } else {
-            return List.of(new Block() {
-                @Override
-                public String getColor() {
-                    return null;
-                }
-
-                @Override
-                public String getMaterial() {
-                    return "brick";
-                }
-            });
-        }
+        return blocks.stream()
+                .filter(block -> block.getMaterial().equals(material))
+                .collect(Collectors.toList());
     }
 
     @Override
