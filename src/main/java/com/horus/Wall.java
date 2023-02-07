@@ -9,7 +9,17 @@ public class Wall implements Structure {
 
     @Override
     public Optional<Block> findBlockByColor(String color) {
-        return Optional.empty();
+        return Optional.of(new Block() {
+            @Override
+            public String getColor() {
+                return "red";
+            }
+
+            @Override
+            public String getMaterial() {
+                return null;
+            }
+        });
     }
 
     @Override
