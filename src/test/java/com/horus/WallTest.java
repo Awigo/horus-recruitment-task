@@ -55,6 +55,11 @@ class WallTest {
         assertFalse(result.isPresent());
     }
 
+    @Test
+    void whenColorIsNullShouldThrowInvalidColorException() {
+        assertThrows(InvalidColorException.class, () -> wall.findBlockByColor(COLOR_BLUE));
+    }
+
     private List<Block> getBlock(String color) {
         return List.of(new Block() {
             @Override
