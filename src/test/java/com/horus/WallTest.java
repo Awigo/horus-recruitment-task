@@ -57,7 +57,8 @@ class WallTest {
 
     @Test
     void whenColorIsNullShouldThrowInvalidColorException() {
-        assertThrows(InvalidColorException.class, () -> wall.findBlockByColor(null));
+        InvalidColorException exception = assertThrows(InvalidColorException.class, () -> wall.findBlockByColor(null));
+        assertEquals(exception.getMessage(), "Color cannot be null!");
     }
 
     private List<Block> getBlock(String color) {
