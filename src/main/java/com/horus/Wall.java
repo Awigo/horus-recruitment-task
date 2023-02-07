@@ -43,10 +43,11 @@ public class Wall implements Structure {
 
     @Override
     public int count() {
-        if (blocks.get(0) instanceof CompositeBlock) {
-            return 8;
-        }
-        return blocks.size();
+        return blocks.stream()
+                .mapToInt(block -> block instanceof CompositeBlock
+                        ? ((CompositeBlock) block).getBlocks().size()
+                        : 1)
+                .sum();
     }
 
     public void setBlocks(List<Block> blocks) {
