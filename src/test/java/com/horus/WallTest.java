@@ -127,6 +127,12 @@ class WallTest {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    void whenMaterialIsNullShouldThrowInvalidMaterialException() {
+        InvalidMaterialException exception = assertThrows(InvalidMaterialException.class, () -> wall.findBlocksByMaterial(null));
+        assertEquals(exception.getMessage(), "Material cannot be null!");
+    }
+
     private List<Block> getBlocks(List<Block> blocks1, List<Block> blocks2) {
         List<Block> blocks = new ArrayList<>();
         blocks.addAll(blocks1);
