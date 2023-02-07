@@ -1,5 +1,6 @@
 package com.horus;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,10 +13,16 @@ class WallTest {
     private static final String COLOR_RED = "red";
     private static final String COLOR_BLUE = "blue";
 
+    private Wall wall;
+
+    @BeforeEach
+    void setUp() {
+        wall = new Wall();
+    }
+
     @Test
     void shouldFindBlockByColorRed() {
         //given
-        Wall wall = new Wall();
         wall.setBlocks(getBlock(COLOR_RED));
 
         //when
@@ -29,7 +36,6 @@ class WallTest {
     @Test
     void shouldFindBlockByColorBlue() {
         //given
-        Wall wall = new Wall();
         wall.setBlocks(getBlock(COLOR_BLUE));
 
         //when
@@ -40,11 +46,11 @@ class WallTest {
         assertEquals(COLOR_BLUE, result.get().getColor());
     }
 
-    private List<Block> getBlock(String colorRed) {
+    private List<Block> getBlock(String color) {
         return List.of(new Block() {
             @Override
             public String getColor() {
-                return colorRed;
+                return color;
             }
 
             @Override
