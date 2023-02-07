@@ -28,7 +28,17 @@ public class Wall implements Structure {
 
     @Override
     public List<Block> findBlocksByMaterial(String material) {
-        return null;
+        return List.of(new Block() {
+            @Override
+            public String getColor() {
+                return null;
+            }
+
+            @Override
+            public String getMaterial() {
+                return "wood";
+            }
+        });
     }
 
     @Override
