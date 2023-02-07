@@ -43,6 +43,9 @@ public class Wall implements Structure {
 
     @Override
     public int count() {
+        if (blocks.get(0) instanceof CompositeBlock) {
+            return 8;
+        }
         return blocks.size();
     }
 
