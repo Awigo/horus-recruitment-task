@@ -105,19 +105,24 @@ class WallTest {
     @Test
     void shouldFindAllBlocksByMaterialWood() {
         //given
-        wall.setBlocks(getWoodenAndBrickBlocks(10, 5));
+        List<Block> woodenBlocks = getBlocksByMaterial(MATERIAL_WOOD, 10);
+        List<Block> brickBlocks = getBlocksByMaterial(MATERIAL_BRICK, 5);
+        List<Block> blocks = new ArrayList<>();
+        blocks.addAll(woodenBlocks);
+        blocks.addAll(brickBlocks);
+        wall.setBlocks(blocks);
 
         //when
         List<Block> result = wall.findBlocksByMaterial(MATERIAL_WOOD);
 
         //then
         assertEquals(10, result.size());
-        assertEquals(getWoodenAndBrickBlocks(10, 0), result);
+        assertEquals(woodenBlocks, result);
     }
 
-    private List<Block> getWoodenAndBrickBlocks(int woodenBlocks, int brickBlocks) {
+    private List<Block> getBlocksByMaterial(String material, int amount) {
         List<Block> blocks = new ArrayList<>();
-        for (int i = 0; i < woodenBlocks; i++) {
+        for (int i = 0; i < amount; i++) {
             blocks.add(new Block() {
                 @Override
                 public String getColor() {
@@ -126,21 +131,7 @@ class WallTest {
 
                 @Override
                 public String getMaterial() {
-                    return MATERIAL_WOOD;
-                }
-            });
-        }
-
-        for (int i = 0; i < brickBlocks; i++) {
-            blocks.add(new Block() {
-                @Override
-                public String getColor() {
-                    return null;
-                }
-
-                @Override
-                public String getMaterial() {
-                    return MATERIAL_BRICK;
+                    return material;
                 }
             });
         }
