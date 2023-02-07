@@ -134,13 +134,14 @@ class WallTest {
     }
 
     @Test
-    void shouldReturnNumberOfBlocks() {
+    void shouldReturnNumberOfBlocksInStructure() {
         //given
         wall.setBlocks(getBlocksByMaterial(MATERIAL_WOOD, 42));
 
         //when
         int result = wall.count();
 
+        //then
         assertEquals(42, result);
     }
 

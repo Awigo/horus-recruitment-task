@@ -43,7 +43,7 @@ public class Wall implements Structure {
 
     @Override
     public int count() {
-        return 0;
+        return blocks.size();
     }
 
     public void setBlocks(List<Block> blocks) {
