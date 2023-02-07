@@ -118,6 +118,15 @@ class WallTest {
         assertEquals(woodenBlocks, result);
     }
 
+    @Test
+    void whenThereAreNoBlocksInGivenMaterialReturnedListShouldBeEmpty() {
+        //when
+        List<Block> result = wall.findBlocksByMaterial(MATERIAL_BRICK);
+
+        //then
+        assertTrue(result.isEmpty());
+    }
+
     private List<Block> getBlocks(List<Block> blocks1, List<Block> blocks2) {
         List<Block> blocks = new ArrayList<>();
         blocks.addAll(blocks1);
