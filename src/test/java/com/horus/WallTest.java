@@ -3,6 +3,7 @@ package com.horus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,6 +100,51 @@ class WallTest {
         //then
         assertEquals(1, result.size());
         assertEquals(MATERIAL_BRICK, result.get(0).getMaterial());
+    }
+
+    @Test
+    void shouldFindAllBlocksByMaterialWood() {
+        //given
+        wall.setBlocks(getWoodenAndBrickBlocks(10, 5));
+
+        //when
+        List<Block> result = wall.findBlocksByMaterial(MATERIAL_WOOD);
+
+        //then
+        assertEquals(10, result.size());
+        assertEquals(getWoodenAndBrickBlocks(10, 0), result);
+    }
+
+    private List<Block> getWoodenAndBrickBlocks(int woodenBlocks, int brickBlocks) {
+        List<Block> blocks = new ArrayList<>();
+        for (int i = 0; i < woodenBlocks; i++) {
+            blocks.add(new Block() {
+                @Override
+                public String getColor() {
+                    return null;
+                }
+
+                @Override
+                public String getMaterial() {
+                    return MATERIAL_WOOD;
+                }
+            });
+        }
+
+        for (int i = 0; i < brickBlocks; i++) {
+            blocks.add(new Block() {
+                @Override
+                public String getColor() {
+                    return null;
+                }
+
+                @Override
+                public String getMaterial() {
+                    return MATERIAL_BRICK;
+                }
+            });
+        }
+        return blocks;
     }
 
     private List<Block> getBlockByColor(String color) {
