@@ -79,7 +79,7 @@ class WallTest {
     @Test
     void shouldFindBlockByMaterialWood() {
         //given
-        wall.setBlocks(getBlockByMaterial(MATERIAL_WOOD));
+        wall.setBlocks(getBlocksByMaterial(MATERIAL_WOOD, 1));
 
         //when
         List<Block> result = wall.findBlocksByMaterial(MATERIAL_WOOD);
@@ -92,7 +92,7 @@ class WallTest {
     @Test
     void shouldFindBlockByMaterialBrick() {
         //given
-        wall.setBlocks(getBlockByMaterial(MATERIAL_BRICK));
+        wall.setBlocks(getBlocksByMaterial(MATERIAL_BRICK, 1));
 
         //when
         List<Block> result = wall.findBlocksByMaterial(MATERIAL_BRICK);
@@ -107,9 +107,7 @@ class WallTest {
         //given
         List<Block> woodenBlocks = getBlocksByMaterial(MATERIAL_WOOD, 10);
         List<Block> brickBlocks = getBlocksByMaterial(MATERIAL_BRICK, 5);
-        List<Block> blocks = new ArrayList<>();
-        blocks.addAll(woodenBlocks);
-        blocks.addAll(brickBlocks);
+        List<Block> blocks = getBlocks(woodenBlocks, brickBlocks);
         wall.setBlocks(blocks);
 
         //when
@@ -118,6 +116,13 @@ class WallTest {
         //then
         assertEquals(10, result.size());
         assertEquals(woodenBlocks, result);
+    }
+
+    private List<Block> getBlocks(List<Block> blocks1, List<Block> blocks2) {
+        List<Block> blocks = new ArrayList<>();
+        blocks.addAll(blocks1);
+        blocks.addAll(blocks2);
+        return blocks;
     }
 
     private List<Block> getBlocksByMaterial(String material, int amount) {
@@ -148,20 +153,6 @@ class WallTest {
             @Override
             public String getMaterial() {
                 return null;
-            }
-        });
-    }
-
-    private List<Block> getBlockByMaterial(String material) {
-        return List.of(new Block() {
-            @Override
-            public String getColor() {
-                return null;
-            }
-
-            @Override
-            public String getMaterial() {
-                return material;
             }
         });
     }
