@@ -23,7 +23,7 @@ class WallTest {
 
         //then
         assertTrue(result.isPresent());
-        assertEquals("red", result.get().getColor());
+        assertEquals(COLOR_RED, result.get().getColor());
     }
 
     @Test
@@ -37,7 +37,7 @@ class WallTest {
 
         //then
         assertTrue(result.isPresent());
-        assertEquals("blue", result.get().getColor());
+        assertEquals(COLOR_BLUE, result.get().getColor());
     }
 
     private List<Block> getBlock(String colorRed) {
