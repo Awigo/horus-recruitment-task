@@ -14,6 +14,10 @@ public class Wall implements Structure {
 
     @Override
     public Optional<Block> findBlockByColor(String color) {
+        if (color == null) {
+            throw new InvalidColorException("Color cannot be null!");
+        }
+
         return blocks.stream()
                 .filter(block -> block.getColor().equals(color))
                 .findAny();
