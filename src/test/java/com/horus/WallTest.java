@@ -13,6 +13,7 @@ class WallTest {
     private static final String COLOR_RED = "red";
     private static final String COLOR_BLUE = "blue";
     private static final String MATERIAL_WOOD = "wood";
+    private static final String MATERIAL_BRICK = "brick";
 
     private Wall wall;
 
@@ -85,6 +86,19 @@ class WallTest {
         //then
         assertEquals(1, result.size());
         assertEquals(MATERIAL_WOOD, result.get(0).getMaterial());
+    }
+
+    @Test
+    void shouldFindBlockByMaterialBrick() {
+        //given
+        wall.setBlocks(getBlockByMaterial(MATERIAL_BRICK));
+
+        //when
+        List<Block> result = wall.findBlocksByMaterial(MATERIAL_BRICK);
+
+        //then
+        assertEquals(1, result.size());
+        assertEquals(MATERIAL_BRICK, result.get(0).getMaterial());
     }
 
     private List<Block> getBlockByColor(String color) {
